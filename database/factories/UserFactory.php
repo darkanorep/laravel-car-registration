@@ -16,21 +16,26 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
     public function definition(): array
     {
+        $dob = $this->faker->date();
+        $age = Carbon::parse($dob)->age;
+    
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => 'user',
-            'address' => fake()->address(),
-            'dob' => fake()->date(),
-            'age' => Carbon::parse(fake()->date())->age,
-            'gender' => fake()->randomElement(['male', 'female']),
+            'address' => $this->faker->address(),
+            'dob' => $dob,
+            'age' => $age,
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'remember_token' => Str::random(10),
         ];
     }
+    
 
     /**
      * Indicate that the model's email address should be unverified.

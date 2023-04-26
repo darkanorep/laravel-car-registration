@@ -27,5 +27,10 @@ class CarRegistrationException extends Exception
             return new static("Invalid Role.", 400);
         }
     }
+
+    //User Exception
+    public static function userNotFound($id) {
+        return  new static("User not found by id: $id", 404);
+    }
         
 }

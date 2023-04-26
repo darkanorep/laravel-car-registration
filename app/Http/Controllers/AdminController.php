@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CarRegistrationException;
 use App\Models\User;
 use App\Models\Owner;
 use App\Models\CarModel;
@@ -18,12 +19,10 @@ class AdminController extends Controller
     //     return User::with('carModels')->with('plateNumbers')->get();
     // }
 
-    public function index()
+    public function index(Request $request)
     {   
-       
-
         // $cars = User::with(['carModels', 'carModels.plateNumbers'])->get();
-        $cars = User::with(['owners','owners.car', 'owners.plateNumber'])->get();
+        $cars = User::with(['owners','owners.car', 'owners.plateNumber'])->paginate($request->row);
         return $cars;
 
     }
@@ -56,8 +55,42 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+        } else {
+            throw CarRegistrationException::userNotFound($id);
+        }
+
+        return response()->json([
+            'message' => 'User deleted successfully'
+        ]);
+    }
+
+    public function restore($id) {
+        
+        $user = User::withTrashed()->find($id);
+
+        if ($user) {
+
+            $user = User::where('id', $id);
+            
+            if ($user) {
+                $user->restore();
+            }
+
+            else {
+                throw CarRegistrationException::userNotFound($id);
+            }
+        } else {
+            throw CarRegistrationException::userNotFound($id);
+        }
+
+        return response()->json([
+            'message' => 'User restored successfully'
+        ]);
     }
 }

@@ -49,7 +49,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/import-car', CarController::class . '@import');
         Route::get('/export-car', CarController::class . '@export');
         
-
         //Car Model
         Route::resource('/models', CarModelController::class);
         Route::post('/models/{id}', CarModelController::class . '@restore');
@@ -60,7 +59,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         //User
         Route::resource('/users', AdminController::class);
-    
+        Route::post('/users/{id}', AdminController::class . '@restore');
+
     });
 
     //global logout
