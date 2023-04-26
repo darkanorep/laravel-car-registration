@@ -151,10 +151,8 @@ class CarController extends Controller
     }
 
     public function export() {
-        return Excel::download(new CarsExport, 'cars.csv');
+        // return Excel::download(new CarsExport, 'cars.csv');
 
-        // (new CarsExport)->queue('cars.xlsx');
-
-        // return back()->withSuccess('Export started!');
+        return (new CarsExport)->download('cars.csv');
     }
 }

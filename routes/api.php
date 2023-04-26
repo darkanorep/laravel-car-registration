@@ -46,13 +46,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/cars/{id}', CarController::class . '@restore');
 
         //Import and export Car
-        Route::post('/import', CarController::class . '@import');
-        Route::get('/export', CarController::class . '@export');
+        Route::post('/import-car', CarController::class . '@import');
+        Route::get('/export-car', CarController::class . '@export');
         
 
         //Car Model
         Route::resource('/models', CarModelController::class);
         Route::post('/models/{id}', CarModelController::class . '@restore');
+
+        //Import and exportCar Model
+        Route::post('/import-car-model', CarModelController::class . '@import');
+        Route::get('/export-car-model', CarModelController::class . '@export');
 
         //User
         Route::resource('/users', AdminController::class);

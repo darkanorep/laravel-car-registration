@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\CarRegistrationException;
-use App\Http\Requests\CarModelRequest;
-use App\Http\Requests\CarModelUpdateRequest;
-use App\Http\Resources\CarResources;
 use App\Models\Car;
 use App\Models\CarModel;
 use Illuminate\Http\Request;
+use App\Imports\CarModelsImport;
+use App\Http\Resources\CarResources;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\CarModelRequest;
+use App\Exceptions\CarRegistrationException;
+use App\Exports\CarModelsExport;
+use App\Http\Requests\CarModelUpdateRequest;
 
 class CarModelController extends Controller
 {
@@ -91,5 +94,17 @@ class CarModelController extends Controller
         } else {
             throw CarRegistrationException::carModelNotFound($id);
         }
+    }
+
+    public function import(Request $request) {
+        Excel::import(new CarModelsImport, $request->file);
+
+        return response()->json([
+            'message' => 'Successfully Car Models imported.'
+        ]);
+    }
+
+    public function export() {
+        return (new CarModelsExport)->download('car_models.csv');
     }
 }
