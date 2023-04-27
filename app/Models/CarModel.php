@@ -15,7 +15,8 @@ class CarModel extends Model
     protected $fillable = [
         'car_id',
         'car_model',
-        'car_year'
+        'car_year',
+        'top_speed'
     ];
 
     public function car() {

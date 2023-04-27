@@ -15,7 +15,8 @@ class CarModelsImport implements ToModel, WithHeadingRow, WithValidation
         return new CarModel([
             'car_id' => $row['car_id'],
             'car_model' => $row['car_model'],
-            'car_year' => $row['car_year']
+            'car_year' => $row['car_year'],
+            'top_speed' => $row['top_speed']
         ]);
     }
 
@@ -24,6 +25,7 @@ class CarModelsImport implements ToModel, WithHeadingRow, WithValidation
             '*.car_id' => ['required', 'integer', 'exists:cars,id',],
             '*.car_model' => ['required', 'string', 'unique:car_models,car_model',],
             '*.car_year' => ['required', 'integer', 'min:1950', 'max:2050'],
+            '*.top_speed' => ['integer', 'min:0']
         ];
     }
 }

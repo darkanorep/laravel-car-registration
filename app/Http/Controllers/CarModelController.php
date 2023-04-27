@@ -105,6 +105,6 @@ class CarModelController extends Controller
     }
 
     public function export() {
-        return (new CarModelsExport)->download('car_models.csv');
+        return (new CarModelsExport)->download('car_models.xlsx');
     }
 }
