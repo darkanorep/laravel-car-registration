@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarModelController;
-use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\PlateNumberController;
 use App\Http\Controllers\UserController;
 
