@@ -19,7 +19,9 @@ class OwnerResource extends JsonResource
             'car_model' => $this->car->car_model,
             'attribute' => [
                 'id' => optional($this->plateNumber)->id,
-                'plate_number' => optional($this->plateNumber)->plate_number
+                'plate_number' => optional($this->plateNumber)->plate_number,
+                'is_approved' => optional($this->plateNumber)->is_approved,
+                'remarks' => optional($this->plateNumber)->remarks,
             ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

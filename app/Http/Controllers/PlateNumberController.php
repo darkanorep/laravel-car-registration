@@ -82,4 +82,21 @@ class PlateNumberController extends Controller
     {
         //
     }
+
+    public function approvedPlateNumber(Request $request, $id) {
+        $plate_number = PlateNumber::find($id);
+
+        if ($plate_number) {
+            
+            $plate_number->update([
+                'is_approved' => $request->is_approved,
+                'remarks' => $request->remarks
+            ]);
+
+        } else {
+            throw new CarRegistrationException("Walang ganun.", 404);
+        }
+
+        return $plate_number;
+    }
 }

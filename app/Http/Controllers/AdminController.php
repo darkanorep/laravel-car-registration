@@ -22,8 +22,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {   
         // $cars = User::with(['carModels', 'carModels.plateNumbers'])->get();
-        $cars = User::with(['owners','owners.car', 'owners.plateNumber'])->paginate($request->row);
-        return $cars;
+        return User::with(['owners','owners.car', 'owners.plateNumber'])->paginate($request->row);
 
     }
 

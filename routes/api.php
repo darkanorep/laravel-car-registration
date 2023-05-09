@@ -60,6 +60,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::resource('/users', AdminController::class);
         Route::post('/users/{id}', AdminController::class . '@restore');
 
+        //Plate Number Approved
+        Route::put('/plate-number-approved/{id}', PlateNumberController::class . '@approvedPlateNumber');
+
     });
 
     //global logout

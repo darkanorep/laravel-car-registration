@@ -11,7 +11,9 @@ class PlateNumber extends Model
 
     protected $fillable = [
         'owner_id',
-        'plate_number'
+        'plate_number',
+        'is_approved',
+        'remarks'
     ];
 
     public function plateNumber() {
